@@ -6,7 +6,8 @@
   "scripts": {
     "frontend":"cd frontend && npm start",
     "backend":"cd backend && npm start",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",

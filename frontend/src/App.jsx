@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("/api/salaries");
+      const response = await axios.get("/salaries");
       setSalaries(response.data);
     };
     fetchData();
@@ -42,7 +42,7 @@ const App = () => {
   const handleRowClick = (year) => {
     setSelectedYear(year);
     const fetchJobTitles = async () => {
-      const response = await axios.get(`/api/job-titles/${year}`);
+      const response = await axios.get(`/job-titles/${year}`);
       setJobTitles(response.data);
     };
     fetchJobTitles();
@@ -60,6 +60,9 @@ const App = () => {
       },
     ],
   };
+  useEffect(()=>{
+    console.log(sortedSalaries,'->sorted sal')
+  },[sortedSalaries])
 
   return (
     <div className="App p-6">

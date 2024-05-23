@@ -15,9 +15,9 @@ const PORT = 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const diraname = path.resolve();
-console.log(diraname)
-console.log(__dirname)
-console.log(__filename)
+console.log('diraname',diraname)
+console.log('__dirname',__dirname)
+console.log('__filename',__filename)
 
 
 // Function to aggregate data
@@ -92,4 +92,11 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
+const __filenameStatic=fileURLToPath(import.meta.url)
+const __dirnameStatic=dirname(__filenameStatic)
+app.use(express.static(path.join(__dirnameStatic,'.','/client/dist')))
+app.use(express.static('dist'))
 
+app.use((req,res)=>{
+    res.sendFile(path.join(__dirnameStatic,'.','/dist','index.html'))
+})

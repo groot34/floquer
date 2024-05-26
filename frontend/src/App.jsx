@@ -3,6 +3,7 @@ import axios from "axios";
 import { Line } from "react-chartjs-2";
 import "tailwindcss/tailwind.css";
 import { chartOptions } from "./chartConfig";
+import toast, { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const [salaries, setSalaries] = useState([]);
@@ -27,6 +28,7 @@ const App = () => {
       direction = "descending";
     }
     setSortConfig({ key, direction });
+    toast.success("Data Sorted")
   };
 
   const sortedSalaries = [...salaries].sort((a, b) => {
@@ -36,6 +38,7 @@ const App = () => {
     if (a[sortConfig.key] > b[sortConfig.key]) {
       return sortConfig.direction === "ascending" ? 1 : -1;
     }
+    toast.success("Data Sorted")
     return 0;
   });
 
@@ -46,6 +49,7 @@ const App = () => {
       setJobTitles(response.data);
     };
     fetchJobTitles();
+    toast.success("Data Fetched")
   };
 
   const lineData = {
@@ -66,6 +70,7 @@ const App = () => {
 
   return (
     <div className="App p-6">
+    <Toaster />
       <h1 className="text-2xl font-bold mb-4">ML Engineer Salaries</h1>
       <div className="mb-6">
         <Line data={lineData} options={chartOptions} width={600} height={300} />
@@ -115,6 +120,8 @@ const App = () => {
           ))}
         </tbody>
       </table>
+
+
       {selectedYear && (
         <div>
           <h2 className="text-xl font-bold mb-4">
